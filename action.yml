@@ -1,4 +1,4 @@
-name: 'Vagrant-VirtualBox'
+name: 'Vagrantup using VirtualBox'
 description: 'Run CI in VirtualBox for GitHub Actions'
 inputs:
   box:
