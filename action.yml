@@ -40,8 +40,9 @@ runs:
   - name: Reformat box name for caching
     id: vars
     run: |
-      FULLDISTRO=${{ input.box }}
+      FULLDISTRO=${{ inputs.box }}
       echo ::set-output name=distro_name::${FULLDISTRO////_}
+    shell: bash 
 
   - name: Cache Vagrant boxes
     uses: actions/cache@v2
