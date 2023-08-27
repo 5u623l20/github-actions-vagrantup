@@ -9,7 +9,7 @@ name: Build
 on: [push]
 jobs:
   build-on-openbsd:
-    runs-on: macos-10.15
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
 
@@ -20,15 +20,15 @@ jobs:
           run: |
             export AUTOCONF_VERSION=2.69
             export AUTOMAKE_VERSION=1.16
-              
+
             export CFLAGS='-I/usr/local/include -L/usr/local/lib'
-              
+
             if [ ! -f /usr/local/lib/libiconv.so ] ; then
                 sudo ln -s /usr/local/lib/libiconv.so.* /usr/local/lib/libiconv.so
             fi
-              
+
             run sudo pkg_add automake-1.16.2
-            
+
             run ./autogen.sh
             run ./configure --prefix=/usr
             run make
@@ -39,7 +39,7 @@ jobs:
 
 |option|required|overview|
 |-|-|-|
-|`runs-on`|✔︎|must be `macos-10.15` otherwise Github Action will fail prematurely |
+|`runs-on`|✔︎|must be `macos-12` otherwise Github Action will fail prematurely |
 |`run`|✔︎|the commands you want to run in vm|
 |`box`|✔︎|the vagrant box name, the most commonly used are `generic/freebsd11` `generic/freebsd12` `generic/netbsd8` `generic/netbsd9` `generic/openbsd6`, you can find your appropriate box from [https://app.vagrantup.com/boxes](https://app.vagrantup.com/boxes)|
 |`mem`|✗|the memory size of vm, default value is `8192` MB|
@@ -60,8 +60,8 @@ run() {
 
 # Under the hood
 
-`GitHub Actions` only supports `Ubuntu`, `Windows` and `macOS` out of the box. 
+`GitHub Actions` only supports `Ubuntu`, `Windows` and `macOS` out of the box.
 
-However, the `macOS-10.15` support virtualization. It has `VirtualBox` and `Vagrant` installed.
+However, the `macOS-12` support virtualization. It has `VirtualBox` and `Vagrant` installed.
 
-So, we can run the `FreeBSD`, `NetBSD`, `OpenBSD` OS in `VirbualBox` on `macOS-10.15`.
+So, we can run the `FreeBSD`, `NetBSD`, `OpenBSD` OS in `VirbualBox` on `macOS-12`.
