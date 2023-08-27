@@ -12,7 +12,7 @@ inputs:
     required: false
     default: '8192'
 branding:
-  icon: 'activity'  
+  icon: 'activity'
   color: 'green'
 
 runs:
@@ -21,9 +21,9 @@ runs:
   - name: Detect Runner OS
     if: runner.os != 'macOS'
     run: |
-      echo "Vagrant is supported only on macos-10.15"
+      echo "Vagrant is supported only on macos-12"
       exit 1
-    shell: bash 
+    shell: bash
 
   - name: Get system info
     uses: kenchan0130/actions-system-info@master
@@ -31,18 +31,18 @@ runs:
 
   - name: Detect Runner OS Release Version
     run: |
-      if [[ ${{ steps.system-info.outputs.release }} != "10.15" ]]; then
-        echo "Vagrant is supported only on macos-10.15"
+      if [[ ${{ steps.system-info.outputs.release }} != "12" ]]; then
+        echo "Vagrant is supported only on macos-12"
         exit 1
       fi
-    shell: bash 
+    shell: bash
 
   - name: Reformat box name for caching
     id: vars
     run: |
       FULLDISTRO=${{ inputs.box }}
       echo ::set-output name=distro_name::${FULLDISTRO////_}
-    shell: bash 
+    shell: bash
 
   - name: Cache Vagrant boxes
     uses: actions/cache@v2
@@ -73,7 +73,7 @@ runs:
         printf "\033[0;35m==>\033[0m \033[0;32m%b\n\033[0m" "$*"
         eval "$*"
       }
-      
+
       ${{inputs.run}}
       EOF
 
@@ -87,9 +87,9 @@ runs:
           config.vm.provision "shell", path: "shell.sh"
         end
       EOF
-      
+
       run cat Vagrantfile
       run cat shell.sh
-      
+
       run vagrant up --provision
-    shell: bash 
+    shell: bash
