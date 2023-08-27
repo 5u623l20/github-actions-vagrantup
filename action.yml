@@ -41,7 +41,8 @@ runs:
     id: vars
     run: |
       FULLDISTRO=${{ inputs.box }}
-      echo ::set-output name=distro_name::${FULLDISTRO////_}
+      echo "{distro_name}={${FULLDISTRO////_}}" >> $GITHUB_OUTPUT
+
     shell: bash
 
   - name: Cache Vagrant boxes
