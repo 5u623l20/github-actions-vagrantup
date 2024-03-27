@@ -29,14 +29,9 @@ runs:
     uses: kenchan0130/actions-system-info@master
     id: system-info
 
-  - name: Get system info through other ways
-    uses: sersoft-gmbh/os-version-action@v3
-    id: os-version
-
   - name: Detect Runner OS Release Version
     run: |
-      #if [[ ${{ steps.system-info.outputs.release }} != "12" ]]; then
-      if [[ ${{ steps.os-version.outputs.version }} != "12" ]]; then
+      if [[ ${{ steps.system-info.outputs.release }} != "12" ]]; then
         echo "Vagrant is supported only on macos-12"
         exit 1
       fi
